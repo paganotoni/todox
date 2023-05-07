@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"paganotoni/todox/internal/envor"
 	"paganotoni/todox/internal/fs"
 	"paganotoni/todox/public"
 	"paganotoni/todox/todo"
@@ -11,11 +12,6 @@ import (
 )
 
 func main() {
-	// dd, _ := public.Folder.ReadDir(".")
-	// for _, v := range dd {
-	// 	println(v.Name())
-	// }
-
 	router := chi.NewRouter()
 
 	router.Use(middleware.RequestID)
@@ -36,5 +32,5 @@ func main() {
 	publicFolder := http.FS(fs.NewFallback(public.Folder, "public/"))
 	router.Handle("/*", http.StripPrefix("/", http.FileServer(publicFolder)))
 
-	http.ListenAndServe(":3000", router)
+	http.ListenAndServe(":"+envor.Get("PORT", "3000"), router)
 }
