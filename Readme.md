@@ -43,7 +43,7 @@ make run
 
 And visit http://localhost:3000 to see the app running.
 
-### Deploying
+## Deploying
 
 The app contains a Dockerfile that can be used to build images and deploy to any container platform. 
 
