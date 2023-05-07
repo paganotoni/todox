@@ -1,0 +1,9 @@
+{{ define "main"}}
+    <li class="gap-3 bg-white items-center rounded gap-2 p-3">
+        <form hx-put="/{{.ID}}" hx-target="closest li" hx-swap="outerHTML" class="flex flex-row gap-3">
+            <input type="text" value="{{ .Content }}" name="content" class="p-2 border rounded flex-grow">
+
+            <button type="submit" class="p-2 px-3 bg-green-500 text-white rounded">Save</button>
+        </form>
+    </li>
+{{ end }}
