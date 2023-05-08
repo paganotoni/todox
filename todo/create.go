@@ -18,7 +18,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	// Append new TODO to the list
 	todox.List = append(todox.List, todo)
 
-	err := internal.Render(w, "todo", todo, "todo/todo.html")
+	err := internal.Render(w, "list", todox.List, "todo/index.html", "todo/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 

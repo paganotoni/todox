@@ -1,5 +1,5 @@
 {{define "main"}}
-    <input type="search" name="keyword" hx-get="/search" hx-target="#todoList" hx-swap="innerHTML" hx-trigger="keyup changed delay:200ms, search"  placeholder="Type in to search" class="p-2 px-3 mb-2 w-full rounded border">
+    <input id="search" type="search" name="keyword" hx-get="/search" hx-target="#todoList" hx-swap="innerHTML" hx-trigger="keyup delay:200ms, search"  placeholder="Type in to search" class="p-2 px-3 mb-2 w-full rounded border">
     <hr class="border mb-2">
     <ul id="todoList" class="flex flex-col gap-2 mb-2">
         {{block "list" . }} 
@@ -13,8 +13,8 @@
         {{ end }}
     </ul>
 
-    <div class="p-3 border bg-white items-center rounded gap-2" _="on htmx:afterRequest if detail.successful tell #content set you.value to ''">
-        <form hx-post="/" hx-target="#todoList" hx-swap="beforeend" class="flex flex-row gap-2">
+    <div class="p-3 border bg-white items-center rounded gap-2" _="on htmx:afterRequest if detail.successful tell [#content,#search] set you.value to ''">
+        <form hx-post="/" hx-target="#todoList" class="flex flex-row gap-2">
             <input type="text" id="content" name="content" class="p-2 border rounded flex-grow" placeholder="TODO Content" autofocus="true">
             <button class="bg-blue-500 rounded p-2 px-4 text-white">Create</button>
         </form>
