@@ -2,6 +2,10 @@
 # - Downloads Tailwind CSS standalone CLI
 # - Downloads Air for live reloading
 setup:
+	@echo "ℹ️  Downloading Air Binary. Please wait..."
+	@curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s
+	@echo "✅ Air binary downloaded."
+
 	@echo "ℹ️  Downloading Tailwind CSS binary. Please wait..."
 	@curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-arm64
 
@@ -9,9 +13,7 @@ setup:
 	@chmod +x tailwindcss-macos-arm64
 	@mv tailwindcss-macos-arm64 bin/tailwindcss
 	
-	@echo "ℹ️  Downloading Air Binary. Please wait..."
-	@curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s
-	@echo "✅ Air binary downloaded."
+	
 
 # Run the application in development mode watching for changes in the
 # html and go files.
