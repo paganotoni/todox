@@ -23,9 +23,10 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	todo.Content = r.FormValue("content")
 
-	_, err = conn.NamedExec(`UPDATE todos SET content = :content WHERE id = :id`, todo)
+	err = update(conn, todo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+
 		return
 	}
 

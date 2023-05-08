@@ -39,3 +39,8 @@ func complete(db *sqlx.DB, todo todox.Todo) error {
 	_, err := db.NamedExec("UPDATE todos SET completed = :completed WHERE id = :id", todo)
 	return err
 }
+
+func update(db *sqlx.DB, todo todox.Todo) error {
+	_, err := db.NamedExec("UPDATE todos SET content = :content WHERE id = :id", todo)
+	return err
+}

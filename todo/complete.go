@@ -1,10 +1,9 @@
 package todo
 
 import (
-	"html/template"
 	"net/http"
-	"paganotoni/todox"
 	"paganotoni/todox/database"
+	"paganotoni/todox/internal"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gofrs/uuid"
@@ -31,13 +30,7 @@ func Complete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.New("updated").ParseFS(todox.Templates, "todo/todo.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	err = tmpl.ExecuteTemplate(w, "todo", todo)
+	err = internal.Render(w, "todo", todo, "todo/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
