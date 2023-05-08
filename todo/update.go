@@ -2,20 +2,19 @@ package todo
 
 import (
 	"net/http"
-	"paganotoni/todox"
 	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/gofrs/uuid"
 )
 
 func Update(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	r.ParseForm()
 
-	var todo todox.Todo
 	conn := database.FromContext(r.Context())
-	err := conn.Get(&todo, "SELECT * FROM todos WHERE id = $1", id)
+	todo, err := find(conn, uuid.FromStringOrNil(id))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 

@@ -17,15 +17,14 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	conn := database.FromContext(r.Context())
-	_, err := conn.NamedExec("INSERT INTO todos (id, content, completed) VALUES (:id, :content, :completed)", todo)
+	err := create(conn, todo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
 	}
 
-	var list []todox.Todo
-	err = conn.Select(&list, "SELECT * FROM todos")
+	list, err := list(conn)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
