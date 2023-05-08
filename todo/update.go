@@ -24,7 +24,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	todo.Content = r.FormValue("content")
 
-	_, err = conn.NamedExec(`UPDATE todos SET content = :completed WHERE id = :id`, todo)
+	_, err = conn.NamedExec(`UPDATE todos SET content = :content WHERE id = :id`, todo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
