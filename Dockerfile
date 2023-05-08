@@ -15,4 +15,4 @@ RUN apk add --no-cache bash ca-certificates
 WORKDIR /bin/
 COPY --from=builder /src/todox/bin/app .
 
-CMD GO_ENV=production app
+CMD GO_ENV=production app migrate && app

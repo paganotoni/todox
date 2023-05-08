@@ -3,20 +3,23 @@ package todo
 import (
 	"net/http"
 	"paganotoni/todox"
+	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
-	"strings"
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
 	term := r.FormValue("keyword")
-	todos := []todox.Todo{}
-	for _, tx := range todox.List {
-		if strings.Contains(tx.Content, term) {
-			todos = append(todos, tx)
-		}
+	var list []todox.Todo
+	conn := database.FromContext(r.Context())
+
+	err := conn.Select(&list, "SELECT * FROM todos WHERE content LIKE $1", "%"+term+"%")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return
 	}
 
-	err := internal.Render(w, "list", todos, "todo/index.html", "todo/todo.html")
+	err = internal.Render(w, "list", list, "todo/index.html", "todo/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 

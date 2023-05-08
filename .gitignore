@@ -2,3 +2,4 @@ cmd/tailwindcss
 public/styles.css
 tmp
 bin
+todox.db**

@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
+	"paganotoni/todox/database"
 	"paganotoni/todox/internal/envor"
 	"paganotoni/todox/internal/fs"
 	"paganotoni/todox/public"
@@ -9,15 +12,27 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "migrate" {
+		err := database.Migrate()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		return
+	}
+
 	router := chi.NewRouter()
 
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
+	router.Use(database.Connection)
 
 	router.Get("/", todo.Index)
 	router.Get("/search", todo.Search)

@@ -3,6 +3,7 @@ package todo
 import (
 	"net/http"
 	"paganotoni/todox"
+	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
 
 	"github.com/gofrs/uuid"
@@ -15,10 +16,23 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		Completed: false,
 	}
 
-	// Append new TODO to the list
-	todox.List = append(todox.List, todo)
+	conn := database.FromContext(r.Context())
+	_, err := conn.NamedExec("INSERT INTO todos (id, content, completed) VALUES (:id, :content, :completed)", todo)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 
-	err := internal.Render(w, "list", todox.List, "todo/index.html", "todo/todo.html")
+		return
+	}
+
+	var list []todox.Todo
+	err = conn.Select(&list, "SELECT * FROM todos")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return
+	}
+
+	err = internal.Render(w, "list", list, "todo/index.html", "todo/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 

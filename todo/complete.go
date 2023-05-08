@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 	"paganotoni/todox"
+	"paganotoni/todox/database"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -12,24 +13,24 @@ func Complete(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	r.ParseForm()
 
-	var todo *todox.Todo
-	for index, tx := range todox.List {
-		if id == tx.ID.String() {
-			todox.List[index].Completed = (r.FormValue("completed") == "on")
-			todo = &todox.List[index]
-
-			break
-		}
-	}
-
-	if todo == nil {
-		http.Error(w, "Not found", http.StatusNotFound)
+	var todo todox.Todo
+	conn := database.FromContext(r.Context())
+	err := conn.Get(&todo, "SELECT * FROM todos WHERE id = $1", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
 	}
 
-	tmpl := template.New("updated")
-	tmpl, err := tmpl.ParseFS(todox.Templates, "todo/todo.html")
+	todo.Completed = (r.FormValue("completed") == "on")
+
+	_, err = conn.NamedExec("UPDATE todos SET completed = :completed WHERE id = :id", todo)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	tmpl, err := template.New("updated").ParseFS(todox.Templates, "todo/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
