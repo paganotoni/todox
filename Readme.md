@@ -1,6 +1,6 @@
 # TODOx
 
-TODOx is a simple todo list app built with Go and HTMX. It uses in memory storage and is meant to prove the concept of using HTMX with Go.
+TODOx is a todo list app built with Go, HTMX, Tailwind CSS and SQLite to store the data. The original goal of this app is to try HTMX and see how it can be used to build a simple app.
 
 ## Features
 
@@ -13,6 +13,7 @@ The stack is simple:
 - Go for the backend
 - HTMX for the frontend
 - Tailwind CSS for styling
+- SQLite for storage
 
 I have set a Makefile to setup and run the app. 
 
@@ -21,9 +22,7 @@ I have set a Makefile to setup and run the app.
 The application is mostly written in Go and HTML. HTMX facilitates a lot of the interaction with the user on the frontend and the backend endpoints process requests and return HTML that will be then rendered by HTMX.
 
 The Tailwind CSS Standalone CLI takes care of the styling by processing html files and adding resulting CSS to public/styles.css.
-Any CSS in the public folder is served by the Go server.
-
-The storage of the application is in memory so it is not persistent. This is a limitation of the application and it is meant to be a proof of concept.
+Any CSS in the public folder is served by the Go server. The storage of the application is SQLite  and uses litestream to persist the data.
 
 ## Running in development
 
