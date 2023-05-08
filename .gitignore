@@ -1,4 +1,4 @@
 cmd/tailwindcss
-public/*.css
+public/styles.css
 tmp
 bin
