@@ -34,3 +34,8 @@ func delete(db *sqlx.DB, id uuid.UUID) error {
 	_, err := db.Exec("DELETE FROM todos WHERE id = $1", id)
 	return err
 }
+
+func complete(db *sqlx.DB, todo todox.Todo) error {
+	_, err := db.NamedExec("UPDATE todos SET completed = :completed WHERE id = :id", todo)
+	return err
+}

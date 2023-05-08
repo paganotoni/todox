@@ -7,15 +7,16 @@ import (
 	"paganotoni/todox/database"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/gofrs/uuid"
 )
 
 func Complete(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
 	r.ParseForm()
 
-	var todo todox.Todo
+	id := uuid.FromStringOrNil(chi.URLParam(r, "id"))
 	conn := database.FromContext(r.Context())
-	err := conn.Get(&todo, "SELECT * FROM todos WHERE id = $1", id)
+
+	todo, err := find(conn, id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
@@ -24,9 +25,9 @@ func Complete(w http.ResponseWriter, r *http.Request) {
 
 	todo.Completed = (r.FormValue("completed") == "on")
 
-	_, err = conn.NamedExec("UPDATE todos SET completed = :completed WHERE id = :id", todo)
-	if err != nil {
+	if err = complete(conn, todo); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+
 		return
 	}
 
