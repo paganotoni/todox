@@ -2,7 +2,7 @@ dbs:
   - path: /bin/todox.db
     replicas:
       - type: s3
-        bucket: your-bucket-name
-        path: todox
-        endpoint: https://f72ffa7fed95c214a8bcc247a3e59805.r2.cloudflarestorage.com/todox
+        bucket: todox
+        path: db
+        endpoint: f72ffa7fed95c214a8bcc247a3e59805.r2.cloudflarestorage.com
         force-path-style: true
