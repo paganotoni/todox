@@ -54,6 +54,8 @@ A few environment variables to consider are:
 ```
 GO_ENV - The environment the app is running in. Defaults to development. Use production in production.
 PORT - The port the app will run on. Defaults to 3000.
+LITESTREAM_ACCESS_KEY_ID - The access key id for the s3 bucket.
+LITESTREAM_SECRET_ACCESS_KEY - The secret access key for the s3 bucket.
 ```
 
 Another consideration to keep in mind is that the build process assumes Linux and x64 architecture so if the docker image is being used on a different platform it may not work. This is because we pull the specific version of the tailwind standalone CLI.
