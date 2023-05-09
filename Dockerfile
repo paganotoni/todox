@@ -21,5 +21,6 @@ WORKDIR /bin/
 COPY --from=builder /src/todox/bin/app .
 COPY --from=builder /src/todox/bin/tools .
 COPY --from=builder /usr/local/bin/litestream /usr/local/bin
+ADD run.sh .
 
 CMD ./run.sh
