@@ -22,7 +22,7 @@ COPY --from=builder /src/todox/bin/app .
 COPY --from=builder /src/todox/bin/tools .
 COPY --from=builder /usr/local/bin/litestream /usr/local/bin
 
-ADD litestream.yml .
+ADD litestream.yml /etc/litestream.yml
 ADD run.sh .
 
 
