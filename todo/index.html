@@ -1,5 +1,6 @@
 {{define "main"}}
-    <input id="search" type="search" name="keyword" hx-get="/search" hx-target="#todoList" hx-swap="innerHTML" hx-trigger="keyup delay:200ms, search"  placeholder="Type in to search" class="p-2 px-3 mb-2 w-full rounded border">
+    <input id="search" type="search" name="keyword" hx-get="/search" hx-target="#todoList" hx-swap="innerHTML" hx-trigger="keyup delay:200ms"  placeholder="Type in to search" class="p-2 px-3 mb-2 w-full rounded border">
+
     <hr class="border mb-2">
     <ul id="todoList" class="flex flex-col gap-2 mb-2">
         {{block "list" . }} 

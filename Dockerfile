@@ -10,9 +10,12 @@ RUN make build
 
 FROM alpine
 
-RUN apk add --no-cache bash ca-certificates
+RUN apk add --no-cache bash ca-certificates make
 
 WORKDIR /bin/
-COPY --from=builder /src/todox/bin/app .
 
-CMD GO_ENV=production app migrate && app
+# Copying binaries
+COPY --from=builder /src/todox/bin/app .
+COPY --from=builder /src/todox/bin/tools .
+
+CMD GO_ENV=production tools migrate && app

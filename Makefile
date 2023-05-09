@@ -12,8 +12,9 @@ setup:
 	@echo "✅ TailwindCSS binary downloaded."
 	@chmod +x tailwindcss-macos-arm64
 	@mv tailwindcss-macos-arm64 bin/tailwindcss
-	
-	
+
+
+	@go run ./cmd/tools/ migrate
 
 # Run the application in development mode watching for changes in the
 # html and go files.
@@ -34,3 +35,4 @@ build:
 
 	./tailwindcss -i todo/todo.css --content "./*.html,./**/*.html" -o public/styles.css -m &&\
 	go build -ldflags '-s -w -extldflags "-static"' -tags osusergo,netgo,sqlite_omit_load_extension -o bin/app ./cmd/todox/main.go
+	go build -ldflags '-s -w -extldflags "-static"' -tags osusergo,netgo,sqlite_omit_load_extension -o bin/tools ./cmd/tools/main.go

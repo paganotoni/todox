@@ -4,7 +4,6 @@ import (
 	"io"
 	"io/fs"
 	"os"
-	"paganotoni/todox/internal/envor"
 	"strings"
 )
 
@@ -45,7 +44,12 @@ func NewFallback(embed fs.FS, dir string) Fallback {
 // ValidPath(name), returning a *PathError with Err set to ErrInvalid or
 // ErrNotExist.
 func (f Fallback) Open(name string) (file fs.File, err error) {
-	switch envor.Get("GO_ENV", "development") {
+	env := "development"
+	if e := os.Getenv("GO_ENV"); e != "" {
+		env = e
+	}
+
+	switch env {
 	case "development":
 		nname := strings.TrimLeft(name, f.dir)
 		file, err = f.dirFs.Open(nname)

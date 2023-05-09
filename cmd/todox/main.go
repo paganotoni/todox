@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
 	"paganotoni/todox/database"
-	"paganotoni/todox/internal/envor"
 	"paganotoni/todox/internal/fs"
 	"paganotoni/todox/public"
 	"paganotoni/todox/todo"
@@ -16,17 +15,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) > 1 && os.Args[1] == "migrate" {
-		err := database.Migrate()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		return
+	// Get the port from the environment
+	addr := ":3000"
+	if e := os.Getenv("PORT"); e != "" {
+		addr = ":" + e
 	}
 
 	// Start the server
-	addr := ":" + envor.Get("PORT", "3000")
 	fmt.Println("Server listening on", addr)
 	http.ListenAndServe(addr, buildServer())
 }
