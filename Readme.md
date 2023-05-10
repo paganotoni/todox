@@ -23,9 +23,9 @@ I have set a Makefile to setup and run the app.
 The application is mostly written in Go and HTML. HTMX facilitates a lot of the interaction with the user on the frontend and the backend endpoints process requests and return HTML that will be then rendered by HTMX.
 
 The Tailwind CSS Standalone CLI takes care of the styling by processing html files and adding resulting CSS to public/styles.css.
-Any CSS in the public folder is served by the Go server. The storage of the application is SQLite and uses litestream to persist the data.
+Any CSS in the public folder is served by the Go server. The storage of the application is SQLite and uses litestream to persist the data to Cloudflare R2.
 
-We use Litestream to persist the data into CloudFlare R2. This is a very simple way to have a backup of the data in case the server goes down. The data is stored in a bucket in CloudFlare R2 and can be restored to a new server if needed.
+We use Litestream to persist the data into CloudFlare R2. This the way we ensure to persist the data in case the server (container) goes down or is replaced. The data is stored in a bucket in CloudFlare R2 and is restored on each application deployment.
 
 ## Running in development
 
