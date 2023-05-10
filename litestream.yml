@@ -2,6 +2,6 @@ dbs:
   - path: todox.db
     replicas:
       - type: s3
-        endpoint: f72ffa7fed95c214a8bcc247a3e59805.r2.cloudflarestorage.com
-        bucket: todox
-        path: db
+        endpoint: ${LITESTREAM_ENDPOINT}
+        bucket: ${LITESTREAM_BUCKET}
+        path: ${LITESTREAM_PATH}
