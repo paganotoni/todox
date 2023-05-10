@@ -12,8 +12,7 @@ ADD . .
 RUN make build
 
 FROM alpine
-
-RUN apk add --no-cache bash ca-certificates make
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /bin/
 
