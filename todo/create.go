@@ -3,8 +3,8 @@ package todo
 import (
 	"net/http"
 	"paganotoni/todox"
-	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
+	"paganotoni/todox/internal/database"
 
 	"github.com/gofrs/uuid"
 )

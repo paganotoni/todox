@@ -2,8 +2,8 @@ package todo
 
 import (
 	"net/http"
-	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
+	"paganotoni/todox/internal/database"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {

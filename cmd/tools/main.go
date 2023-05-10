@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"paganotoni/todox/database"
+	"paganotoni/todox/internal/database"
 
 	_ "github.com/mattn/go-sqlite3"
 )

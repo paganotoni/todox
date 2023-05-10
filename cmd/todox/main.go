@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"paganotoni/todox/database"
+	"paganotoni/todox/internal/database"
 	"paganotoni/todox/internal/fs"
 	"paganotoni/todox/public"
 	"paganotoni/todox/todo"

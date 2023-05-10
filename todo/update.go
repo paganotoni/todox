@@ -2,8 +2,8 @@ package todo
 
 import (
 	"net/http"
-	"paganotoni/todox/database"
 	"paganotoni/todox/internal"
+	"paganotoni/todox/internal/database"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gofrs/uuid"
