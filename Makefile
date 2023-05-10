@@ -19,7 +19,7 @@ setup:
 # Run the application in development mode watching for changes in the
 # html and go files.
 run:
-	@./bin/air --build.cmd "go build -o bin/app ./cmd/todox/main.go" --build.bin "./bin/app" &\
+	@./bin/air --build.cmd "go build -o bin/app ./cmd/todox/main.go" --build.bin "./bin/app" -log.main_only true &\
 	./bin/tailwindcss -i todo/todo.css --content "./*.html,./**/*.html" -o public/styles.css -w &\
 	wait
 
