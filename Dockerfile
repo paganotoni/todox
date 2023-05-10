@@ -23,7 +23,7 @@ COPY --from=builder /src/todox/bin/tools .
 COPY --from=builder /usr/local/bin/litestream /usr/local/bin
 
 ADD litestream.yml /etc/litestream.yml
-ADD run.sh .
 
-
-CMD ./run.sh
+CMD litestream restore todox.db &&\
+    /bin/tools migrate &&\
+    litestream replicate -exec "/bin/app"
