@@ -4,9 +4,9 @@ TODOx is a todo list app built with Go, HTMX, Tailwind CSS and SQLite to store t
 
 ## Features
 
-- Create, Read, Update, and Delete todos
+- Create, Read, Update, and Delete TODOs
 - Searching TODOs
-- Complete TODOs
+- Complete/Uncomplete TODOs
 
 ## Stack
 
