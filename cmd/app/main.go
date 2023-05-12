@@ -23,30 +23,30 @@ func main() {
 
 	// Start the server
 	fmt.Println("Server listening on", addr)
-	http.ListenAndServe(addr, buildServer())
+	http.ListenAndServe(addr, router())
 }
 
-func buildServer() http.Handler {
-	router := chi.NewRouter()
+func router() http.Handler {
+	r := chi.NewRouter()
 
-	router.Use(middleware.RequestID)
-	router.Use(middleware.RealIP)
-	router.Use(middleware.Logger)
-	router.Use(middleware.Recoverer)
-	router.Use(database.Connection)
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+	r.Use(database.Connection)
 
-	router.Get("/", todo.Index)
-	router.Get("/search", todo.Search)
-	router.Get("/{id}/edit", todo.Edit)
-	router.Post("/", todo.Create)
-	router.Delete("/{id}", todo.Delete)
-	router.Put("/{id}", todo.Update)
-	router.Put("/{id}/complete", todo.Complete)
+	r.Get("/", todo.Index)
+	r.Get("/search", todo.Search)
+	r.Get("/{id}/edit", todo.Edit)
+	r.Post("/", todo.Create)
+	r.Delete("/{id}", todo.Delete)
+	r.Put("/{id}", todo.Update)
+	r.Put("/{id}/complete", todo.Complete)
 
 	// Static files like css, images and so on.
 	// TODO: review name of the folder
 	publicFolder := http.FS(fs.NewFallback(public.Folder, "public/"))
-	router.Handle("/*", http.StripPrefix("/", http.FileServer(publicFolder)))
+	r.Handle("/*", http.StripPrefix("/", http.FileServer(publicFolder)))
 
-	return router
+	return r
 }

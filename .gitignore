@@ -1,5 +1,5 @@
 cmd/tailwindcss
-public/styles.css
+public/application.css
 tmp
 bin
 todox.db**

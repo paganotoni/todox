@@ -19,8 +19,8 @@ setup:
 # Run the application in development mode watching for changes in the
 # html and go files.
 run:
-	@./bin/air --build.cmd "go build -o bin/app ./cmd/todox/main.go" --build.bin "./bin/app" -log.main_only true &\
-	./bin/tailwindcss -i todo/todo.css --content "./*.html,./**/*.html" -o public/styles.css -w &\
+	@./bin/air --build.cmd "go build -o bin/app ./cmd/cach/main.go" --build.bin "./bin/app" -log.main_only true -build.exclude_regex "\\.html" &\
+	./bin/tailwindcss -i application.css --content "./*.html,./**/*.html" -o public/application.css -w &\
 	wait
 
 # Build the css and then the app, a few notes:
@@ -33,6 +33,6 @@ build:
 	@mv tailwindcss-linux-x64 tailwindcss
 	@echo "✅ Tailwind CSS binary downloaded."
 
-	./tailwindcss -i todo/todo.css --content "./*.html,./**/*.html" -o public/styles.css -m &&\
-	go build -ldflags '-s -w -extldflags "-static"' -tags osusergo,netgo,sqlite_omit_load_extension -o bin/app ./cmd/todox/main.go
+	./tailwindcss -i application.css --content "./*.html,./**/*.html" -o public/application.css
+	go build -ldflags '-s -w -extldflags "-static"' -tags osusergo,netgo,sqlite_omit_load_extension -o bin/app ./cmd/app/main.go
 	go build -ldflags '-s -w -extldflags "-static"' -tags osusergo,netgo,sqlite_omit_load_extension -o bin/tools ./cmd/tools/main.go
