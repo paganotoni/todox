@@ -6,10 +6,12 @@ TODOx is a todo list app built with Go, HTMX, Tailwind CSS and SQLite to store t
 
 - Create, Read, Update, and Delete todos
 - Searching TODOs
+- Complete TODOs
 
 ## Stack
 
 The stack is simple:
+
 - Go for the backend
 - HTMX for the frontend
 - Tailwind CSS for styling
