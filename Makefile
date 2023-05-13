@@ -19,7 +19,7 @@ setup:
 # Run the application in development mode watching for changes in the
 # html and go files.
 run:
-	@./bin/air --build.cmd "go build -o bin/app ./cmd/cach/main.go" --build.bin "./bin/app" -log.main_only true -build.exclude_regex "\\.html" &\
+	@./bin/air --build.cmd "go build -o bin/app ./cmd/app/main.go" --build.bin "./bin/app" -log.main_only true -build.exclude_regex "\\.html" &\
 	./bin/tailwindcss -i application.css --content "./*.html,./**/*.html" -o public/application.css -w &\
 	wait
 
