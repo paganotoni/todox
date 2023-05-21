@@ -35,6 +35,9 @@ func router() http.Handler {
 	r.Use(middleware.Recoverer)
 	r.Use(database.Connection)
 
+	// Mounting the profiler at /debug to :eyes: the app
+	r.Mount("/debug", middleware.Profiler())
+
 	r.Get("/", todo.Index)
 	r.Get("/search", todo.Search)
 	r.Get("/{id}/edit", todo.Edit)
