@@ -8,8 +8,6 @@ import (
 	"paganotoni/todox/internal/sqlite"
 
 	"github.com/leapkit/core/db"
-
-	_ "github.com/lib/pq"
 )
 
 func main() {
