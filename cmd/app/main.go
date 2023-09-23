@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"paganotoni/todox/internal/config"
 	"paganotoni/todox/internal/sqlite"
 	"paganotoni/todox/internal/web"
 
@@ -17,6 +18,10 @@ func main() {
 
 	s := server.New(
 		"Todox",
+
+		//Port where the app will run.
+		server.WithPort(config.Port),
+
 		// Services to be injected in the context.
 		server.WithCtxVal("todoService", sqlite.NewTodoService(conn)),
 
