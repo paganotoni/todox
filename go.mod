@@ -8,7 +8,7 @@ require (
 	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/gorilla/sessions v1.2.1
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/leapkit/core v1.0.9
+	github.com/leapkit/core v1.0.10
 	github.com/mattn/go-sqlite3 v1.14.17
 	github.com/paganotoni/tailo v1.0.1
 )

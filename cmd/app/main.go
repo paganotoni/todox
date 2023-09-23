@@ -21,6 +21,7 @@ func main() {
 
 		//Port where the app will run.
 		server.WithPort(config.Port),
+		server.WithHost("0.0.0.0"),
 
 		// Services to be injected in the context.
 		server.WithCtxVal("todoService", sqlite.NewTodoService(conn)),
