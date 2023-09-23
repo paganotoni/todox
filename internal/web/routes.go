@@ -4,7 +4,7 @@ import (
 	"embed"
 	"net/http"
 	"paganotoni/todox/internal/config"
-	"paganotoni/todox/internal/helpers"
+	"paganotoni/todox/internal/web/helpers"
 	"paganotoni/todox/internal/web/public"
 	"paganotoni/todox/internal/web/todos"
 	"path"
