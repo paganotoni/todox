@@ -8,4 +8,5 @@ var (
 	SessionName             = "todox"
 	SessionSecret           = "secret"
 	GlovesExtensionsToWatch = []string{".go", ".html", ".css", ".js"}
+	GlovesExcludePaths      = []string{""}
 )

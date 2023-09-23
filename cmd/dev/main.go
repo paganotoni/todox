@@ -27,8 +27,8 @@ func main() {
 		// // Extensions to watch
 		gloves.WatchExtension(config.GlovesExtensionsToWatch...),
 
-		// // Exclude paths from code reloading.
-		// gloves.ExcludePaths(config.GlovesExcludePaths...),
+		// Exclude paths from code reloading.
+		gloves.ExcludePaths(config.GlovesExcludePaths...),
 	)
 
 	if err != nil {
