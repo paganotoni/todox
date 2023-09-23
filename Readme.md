@@ -53,5 +53,3 @@ A few environment variables to consider are:
 GO_ENV                          - The environment the app is running in. Defaults "development"
 PORT                            - The port the app will run on. Defaults "3000"
 ```
-
-Another consideration to keep in mind is that the build process assumes Linux and x64 architecture so if the docker image is being used on a different platform it may not work. This is because we pull the specific version of the tailwind standalone CLI.
