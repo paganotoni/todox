@@ -1,0 +1,7 @@
+<%= for (todo) in list { %>
+    <%= partial("todos/todo.html") %>
+<% } %>
+
+<%= if (len(list) == 0) { %>
+    <li class="p-10 bg-white rounded border text-center"> No TODOs found. </li>
+<% } %>
