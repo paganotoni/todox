@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"paganotoni/todox/internal/config"
+	"paganotoni/todox/internal/migrations"
 	"paganotoni/todox/internal/sqlite"
 
 	"github.com/leapkit/core/db"
@@ -29,7 +30,7 @@ func main() {
 			return
 		}
 
-		err = db.RunMigrations(sqlite.Migrations, conn)
+		err = db.RunMigrations(migrations.All, conn)
 		if err != nil {
 			fmt.Println(err)
 
