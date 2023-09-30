@@ -1,7 +1,6 @@
 package todos
 
 import (
-	"fmt"
 	"net/http"
 	"paganotoni/todox/internal/models"
 
@@ -27,8 +26,6 @@ func Complete(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	fmt.Println("Completed:", todo.Completed)
 
 	err = todos.SetCompleted(todo.ID, todo.Completed)
 	if err != nil {
