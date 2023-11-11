@@ -2,35 +2,32 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"paganotoni/todox/internal/app"
 	"paganotoni/todox/internal/config"
-	"paganotoni/todox/internal/sqlite"
-	"paganotoni/todox/internal/web"
 
 	"github.com/leapkit/core/server"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	conn, err := sqlite.Connection()
-	if err != nil {
-		panic(err)
-	}
-
 	s := server.New(
 		"Todox",
 
-		//Port where the app will run.
 		server.WithPort(config.Port),
-		server.WithHost("0.0.0.0"),
-
-		// Services to be injected in the context.
-		server.WithCtxVal("todoService", sqlite.NewTodoService(conn)),
-
-		// Routes are defined in internal/web/routes.go
-		// we pass these to the newly created server
-		// as an option.
-		server.WithRoutesFn(web.Routes),
+		server.WithHost(config.Host),
 	)
+
+	// Application services
+	if err := app.AddServices(s); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	// Application routes
+	if err := app.AddRoutes(s); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	if err := s.Start(); err != nil {
 		fmt.Println(err)

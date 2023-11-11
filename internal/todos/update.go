@@ -2,15 +2,14 @@ package todos
 
 import (
 	"net/http"
-	"paganotoni/todox/internal/models"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gofrs/uuid/v5"
 	"github.com/leapkit/core/render"
 )
 
-func Edit(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(models.TodoService)
+func Update(w http.ResponseWriter, r *http.Request) {
+	todos := r.Context().Value("todoService").(Service)
 
 	id := uuid.FromStringOrNil(chi.URLParam(r, "id"))
 	todo, err := todos.Find(id)
@@ -20,10 +19,20 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	r.ParseForm()
+	todo.Content = r.FormValue("content")
+
+	err = todos.Update(&todo)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return
+	}
+
 	rw := render.FromCtx(r.Context())
 	rw.Set("todo", todo)
 
-	err = rw.RenderClean("todos/edit.html")
+	err = rw.RenderClean("todos/todo.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 

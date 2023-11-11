@@ -2,22 +2,21 @@ package public
 
 import (
 	"embed"
-	"path/filepath"
-
 	"paganotoni/todox/internal/config"
+	"path/filepath"
 
 	"github.com/leapkit/core/mdfs"
 )
 
 var (
-	//go:embed *.css
+	//go:embed *
 	files embed.FS
 
 	// Folder is a mdfs instance that contains all the
 	// files in the public folder.
 	Folder = mdfs.New(
 		files,
-		filepath.Join("internal", "web", "public"),
+		filepath.Join("internal", "public"),
 		config.Environment,
 	)
 )

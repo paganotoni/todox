@@ -2,15 +2,14 @@ package todos
 
 import (
 	"net/http"
-	"paganotoni/todox/internal/models"
 
 	"github.com/leapkit/core/render"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(models.TodoService)
+func Search(w http.ResponseWriter, r *http.Request) {
+	todos := r.Context().Value("todoService").(Service)
 
-	list, err := todos.List()
+	list, err := todos.Search(r.FormValue("keyword"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -19,7 +18,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	rw := render.FromCtx(r.Context())
 	rw.Set("list", list)
 
-	err = rw.Render("todos/index.html")
+	err = rw.RenderClean("todos/list.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

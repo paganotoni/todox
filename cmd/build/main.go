@@ -3,15 +3,16 @@ package main
 import (
 	"os"
 	"os/exec"
+	"paganotoni/todox/internal/config"
 
 	"github.com/paganotoni/tailo"
 )
 
 func main() {
 	tailo.Build(
-		tailo.UseInputPath("internal/web/assets/application.css"),
-		tailo.UseConfigPath("internal/config/tailwind.config.js"),
-		tailo.UseOutputPath("internal/web/public/application.css"),
+		config.TailoInputPathOption,
+		config.TailwindConfigPathOption,
+		config.TailoOutputPathOption,
 	)
 
 	cmd := exec.Command("go", "build")
@@ -19,7 +20,7 @@ func main() {
 		cmd.Args,
 
 		`--ldflags`, `-linkmode=external -extldflags="-static"`,
-		`-tags`, `osusergo,netgo,musl`,
+		`-tags`, `osusergo,netgo,sqlite_omit_load_extension`,
 		`-buildvcs=false`,
 		"-o", "bin/app",
 		"cmd/app/main.go",

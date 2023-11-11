@@ -2,14 +2,13 @@ package todos
 
 import (
 	"net/http"
-	"paganotoni/todox/internal/models"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gofrs/uuid/v5"
 )
 
 func Delete(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(models.TodoService)
+	todos := r.Context().Value("todoService").(Service)
 
 	id := uuid.FromStringOrNil(chi.URLParam(r, "id"))
 	err := todos.Delete(id)

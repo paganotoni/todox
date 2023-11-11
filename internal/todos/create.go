@@ -2,14 +2,13 @@ package todos
 
 import (
 	"net/http"
-	"paganotoni/todox/internal/models"
 
 	"github.com/leapkit/core/form"
 	"github.com/leapkit/core/render"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
-	todo := models.Todo{}
+	todo := Instance{}
 	err := form.Decode(r, &todo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -17,7 +16,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	todo.Completed = false
-	todos := r.Context().Value("todoService").(models.TodoService)
+	todos := r.Context().Value("todoService").(Service)
 
 	err = todos.Create(&todo)
 	if err != nil {
