@@ -21,7 +21,7 @@ The stack aims to be as simple as possible. It consists of:
 
 The application is mostly written in Go and HTML. HTMX facilitates a lot of the interaction with the user on the frontend and the backend endpoints process requests and return HTML that will be then rendered by HTMX.
 
-The Tailwind CSS Standalone CLI takes care of the styling by processing html files and adding resulting CSS to `internal/web/public/styles.css`. Any CSS in the public folder is served by the Go server. The storage of the application is SQLite.
+The Tailwind CSS Standalone CLI takes care of the styling by processing html files and adding resulting CSS to `internal/app/public/styles.css`. Any CSS in the public folder is served by the Go server. The storage of the application is SQLite.
 
 ## Running in development
 
