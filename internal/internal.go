@@ -11,9 +11,5 @@ var (
 	//go:embed **/*.html
 	tmpls embed.FS
 
-	Templates = mdfs.New(
-		tmpls,
-		"internal",
-		config.Environment,
-	)
+	Templates = mdfs.New(tmpls, "internal", config.Environment)
 )
