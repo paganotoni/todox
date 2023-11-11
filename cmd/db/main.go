@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"paganotoni/todox/internal/config"
+	"paganotoni/todox/internal/app/config"
 	"paganotoni/todox/internal/migrations"
 	"paganotoni/todox/internal/sqlite"
 

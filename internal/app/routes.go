@@ -2,8 +2,8 @@ package app
 
 import (
 	"paganotoni/todox/internal"
-	"paganotoni/todox/internal/config"
-	"paganotoni/todox/internal/public"
+	"paganotoni/todox/internal/app/config"
+	"paganotoni/todox/internal/app/public"
 	"paganotoni/todox/internal/todos"
 
 	"github.com/go-chi/chi/v5/middleware"
@@ -17,7 +17,6 @@ import (
 // it assumes that the base services have been injected
 // in the creation of the server instance.
 func AddRoutes(r *server.Instance) error {
-	// Default middleware
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)

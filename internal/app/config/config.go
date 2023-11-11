@@ -19,19 +19,17 @@ var (
 	SessionSecret = envor.Get("SESSION_SECRET", "secret_key")
 
 	// Tailo Options
-	TailoInputPathOption     = tailo.UseInputPath("internal/assets/application.css")
-	TailoOutputPathOption    = tailo.UseOutputPath("internal/public/application.css")
-	TailwindConfigPathOption = tailo.UseConfigPath("tailwind.config.js")
+	TailoOptions = []tailo.Option{
+		tailo.UseInputPath("internal/assets/application.css"),
+		tailo.UseOutputPath("internal/app/public/application.css"),
+		tailo.UseConfigPath("tailwind.config.js"),
+	}
 
 	GlovesOptions = []gloves.Option{
+		// Run the tailo watcher so when changes are made to
+		// the html code it rebuilds css.
 		gloves.WithRunner(func() {
-			// Run the tailo watcher so when changes are made to
-			// the html code it rebuilds css.
-			tailo.Watch(
-				TailoInputPathOption,
-				TailoOutputPathOption,
-				TailwindConfigPathOption,
-			)
+			tailo.Watch(TailoOptions...)
 		}),
 
 		gloves.WatchExtension(".go", ".html", ".css", ".js"),

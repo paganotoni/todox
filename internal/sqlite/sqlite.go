@@ -1,7 +1,7 @@
 package sqlite
 
 import (
-	"paganotoni/todox/internal/config"
+	"paganotoni/todox/internal/app/config"
 
 	"github.com/leapkit/core/db"
 	_ "github.com/mattn/go-sqlite3"

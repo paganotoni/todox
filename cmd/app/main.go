@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"paganotoni/todox/internal/app"
-	"paganotoni/todox/internal/config"
+	"paganotoni/todox/internal/app/config"
 
 	"github.com/leapkit/core/server"
 )
