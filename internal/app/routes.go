@@ -22,8 +22,7 @@ func AddRoutes(r *server.Instance) error {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	rengine := render.NewEngine(internal.Templates)
-	r.Use(render.Middleware(rengine))
+	r.Use(render.Middleware(render.NewEngine(internal.Templates)))
 	r.Use(session.Middleware(config.SessionSecret, config.SessionName))
 
 	// Todo actions
