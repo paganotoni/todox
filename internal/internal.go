@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	//go:embed **/*.html
+	//go:embed **/*.html **/**/*.html
 	tmpls embed.FS
 
 	Templates = mdfs.New(tmpls, "internal", config.Environment)
