@@ -1,4 +1,4 @@
-module paganotoni/todox
+module todox
 
 go 1.21.0
 

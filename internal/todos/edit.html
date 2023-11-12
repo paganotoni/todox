@@ -1,4 +1,4 @@
-<li class="gap-3 bg-white items-center rounded gap-2 p-3">
+<li class="gap-3 bg-white items-center rounded gap-2 p-3" hx-get="/<%= todo.ID %>" hx-trigger="keyup[keyCode==27]" >
     <form hx-put="/<%= todo.ID %>" hx-target="closest li" hx-swap="outerHTML" class="flex flex-row gap-3">
         <input type="text" value="<%= todo.Content %>" name="content" class="p-2 border rounded flex-grow">
 

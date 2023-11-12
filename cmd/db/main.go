@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"paganotoni/todox/internal/app/config"
-	"paganotoni/todox/internal/migrations"
-	"paganotoni/todox/internal/sqlite"
+	"todox/internal/app/config"
+	"todox/internal/app/database"
+	"todox/internal/app/database/migrations"
 
 	"github.com/leapkit/core/db"
 )
@@ -24,7 +24,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "migrate":
-		conn, err := sqlite.Connection()
+		conn, err := database.Connection()
 		if err != nil {
 			fmt.Println(err)
 			return

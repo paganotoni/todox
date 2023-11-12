@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"paganotoni/todox/internal/migrations"
-	"paganotoni/todox/internal/sqlite"
+	"todox/internal/app/database"
+	"todox/internal/app/database/migrations"
 
 	"github.com/leapkit/core/db"
 	"github.com/paganotoni/tailo"
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	fmt.Println("✅ Tailwind CSS setup successfully")
-	conn, err := sqlite.Connection()
+	conn, err := database.Connection()
 	if err != nil {
 		fmt.Println(err)
 		return

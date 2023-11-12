@@ -5,8 +5,8 @@ package public
 
 import (
 	"embed"
-	"paganotoni/todox/internal/app/config"
 	"path/filepath"
+	"todox/internal/app/config"
 
 	"github.com/leapkit/core/mdfs"
 )

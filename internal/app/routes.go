@@ -1,10 +1,10 @@
 package app
 
 import (
-	"paganotoni/todox/internal"
-	"paganotoni/todox/internal/app/config"
-	"paganotoni/todox/internal/app/public"
-	"paganotoni/todox/internal/todos"
+	"todox/internal"
+	"todox/internal/app/config"
+	"todox/internal/app/public"
+	"todox/internal/todos"
 
 	"github.com/go-chi/chi/v5/middleware"
 

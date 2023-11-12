@@ -9,7 +9,7 @@ import (
 )
 
 func Edit(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(Service)
+	todos := r.Context().Value("todoService").(*service)
 
 	id := uuid.FromStringOrNil(chi.URLParam(r, "id"))
 	todo, err := todos.Find(id)

@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 	"os/exec"
-	"paganotoni/todox/internal/app/config"
+	"todox/internal/app/config"
 
 	"github.com/paganotoni/tailo"
 )

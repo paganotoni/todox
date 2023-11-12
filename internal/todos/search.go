@@ -7,7 +7,7 @@ import (
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(Service)
+	todos := r.Context().Value("todoService").(*service)
 
 	list, err := todos.Search(r.FormValue("keyword"))
 	if err != nil {

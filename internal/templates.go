@@ -2,7 +2,7 @@ package internal
 
 import (
 	"embed"
-	"paganotoni/todox/internal/app/config"
+	"todox/internal/app/config"
 
 	"github.com/leapkit/core/mdfs"
 )

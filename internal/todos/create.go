@@ -16,7 +16,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	todo.Completed = false
-	todos := r.Context().Value("todoService").(Service)
+	todos := r.Context().Value("todoService").(*service)
 
 	err = todos.Create(&todo)
 	if err != nil {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"paganotoni/todox/internal/app/config"
+	"todox/internal/app/config"
 
 	"github.com/leapkit/core/gloves"
 )

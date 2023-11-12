@@ -7,7 +7,7 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(Service)
+	todos := r.Context().Value("todoService").(*service)
 
 	list, err := todos.List()
 	if err != nil {

@@ -8,7 +8,7 @@ import (
 )
 
 func Delete(w http.ResponseWriter, r *http.Request) {
-	todos := r.Context().Value("todoService").(Service)
+	todos := r.Context().Value("todoService").(*service)
 
 	id := uuid.FromStringOrNil(chi.URLParam(r, "id"))
 	err := todos.Delete(id)

@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	"paganotoni/todox/internal/app"
-	"paganotoni/todox/internal/app/config"
+	"todox/internal/app"
+	"todox/internal/app/config"
 
 	"github.com/leapkit/core/server"
 )
