@@ -38,6 +38,5 @@ var (
 		}),
 
 		gloves.WatchExtension(".go", ".html", ".css", ".js"),
-		gloves.ExcludePaths(""), // Add paths to exclude here.
 	}
 )

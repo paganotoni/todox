@@ -28,7 +28,7 @@ func (s *service) Create(todo *Instance) error {
 
 func (s *service) List() ([]Instance, error) {
 	var list []Instance
-	err := s.db.Select(&list, "SELECT * FROM todos")
+	err := s.db.Select(&list, "SELECT * FROM todos ORDER BY completed ASC")
 	return list, err
 }
 

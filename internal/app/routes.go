@@ -29,6 +29,7 @@ func AddRoutes(r *server.Instance) error {
 	r.Get("/", todos.Index)
 	r.Get("/search", todos.Search)
 	r.Get("/{id}/edit", todos.Edit)
+	r.Get("/{id}/show", todos.Show)
 	r.Post("/", todos.Create)
 	r.Delete("/{id}", todos.Delete)
 	r.Put("/{id}", todos.Update)
