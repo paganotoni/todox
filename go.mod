@@ -7,7 +7,7 @@ require (
 	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/leapkit/core v1.1.0
-	github.com/mattn/go-sqlite3 v1.14.18
+	github.com/mattn/go-sqlite3 v1.14.19
 	github.com/paganotoni/tailo v1.0.2
 )
 
