@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+// Middleware is a function that receives a http.Handler and returns a http.Handler
+// that can be used to wrap the original handler with some functionality.
+type Middleware func(http.Handler) http.Handler
+
 func requestID(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		r = r.WithContext(context.WithValue(r.Context(), "requestID", time.Now().UnixNano()))
@@ -17,11 +21,13 @@ func requestID(next http.Handler) http.Handler {
 // logger is a middleware that logs the request method and URL
 // and the time it took to process the request.
 func logger(next http.Handler) http.Handler {
-	// TODO: allow logger.With to be passed as an option
+	logger := slog.Default()
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		next.ServeHTTP(w, r)
-		slog.Info("", "method", r.Method, "url", r.URL.Path, "took", time.Since(start))
+
+		logger.Info("", "method", r.Method, "url", r.URL.Path, "took", time.Since(start))
 	})
 }
 

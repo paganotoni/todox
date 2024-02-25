@@ -27,7 +27,7 @@ func AddRoutes(r *server.Root) error {
 	r.HandleFunc("GET /search", todos.Search)
 	r.HandleFunc("POST /{$}", todos.Create)
 
-	r.Group("/{id}/", func(wid *server.RouteGroup) {
+	r.Group("/{id}/", func(wid *server.HandlerGroup) {
 		wid.HandleFunc("GET /edit", todos.Edit)
 		wid.HandleFunc("GET /show", todos.Show)
 		wid.HandleFunc("DELETE /{$}", todos.Delete)

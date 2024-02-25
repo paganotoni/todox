@@ -9,7 +9,7 @@ import (
 // it also has a host and port as well as a Start method as it is the root of the server
 // that should be executed for all the handlers in the group.
 type Root struct {
-	*RouteGroup
+	*HandlerGroup
 
 	host string
 	port string
@@ -18,10 +18,10 @@ type Root struct {
 // New creates a new server with the given options and default middleware.
 func New(options ...Option) *Root {
 	ss := &Root{
-		RouteGroup: &RouteGroup{
+		HandlerGroup: &HandlerGroup{
 			prefix:     "",
 			mux:        http.NewServeMux(),
-			middleware: []func(http.Handler) http.Handler{},
+			middleware: []Middleware{},
 		},
 
 		host: "0.0.0.0",
