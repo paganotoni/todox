@@ -9,7 +9,10 @@ import (
 )
 
 func main() {
-	server := server.New()
+	server := server.New(
+		server.WithHost(internal.Host),
+		server.WithPort(internal.Port),
+	)
 
 	// Application services
 	if err := internal.AddServices(server); err != nil {

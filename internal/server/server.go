@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+// Rood routeGroup is a group of routes with a common prefix and middleware
+// it also has a host and port as well as a Start method as it is the root of the server
+// that should be executed for all the handlers in the group.
 type Root struct {
 	*RouteGroup
 
