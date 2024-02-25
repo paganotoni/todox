@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"todox/internal/app/config"
+	"todox/internal"
 
 	"github.com/leapkit/core/gloves"
 )
@@ -11,7 +11,7 @@ func main() {
 	err := gloves.Start(
 		"cmd/app/main.go",
 
-		config.GlovesOptions...,
+		internal.GlovesOptions...,
 	)
 
 	if err != nil {

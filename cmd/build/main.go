@@ -3,13 +3,13 @@ package main
 import (
 	"os"
 	"os/exec"
-	"todox/internal/app/config"
+	"todox/internal"
 
 	"github.com/paganotoni/tailo"
 )
 
 func main() {
-	tailo.Build(config.TailoOptions...)
+	tailo.Build(internal.TailoOptions...)
 
 	cmd := exec.Command("go", "build")
 	cmd.Args = append(

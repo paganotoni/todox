@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"todox/internal/app/database"
-	"todox/internal/app/database/migrations"
+	"todox/internal"
+	"todox/internal/migrations"
 
 	"github.com/leapkit/core/db"
 	"github.com/paganotoni/tailo"
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	fmt.Println("✅ Tailwind CSS setup successfully")
-	conn, err := database.Connection()
+	conn, err := internal.Connection()
 	if err != nil {
 		fmt.Println(err)
 		return

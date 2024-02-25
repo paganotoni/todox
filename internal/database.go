@@ -1,8 +1,6 @@
-package database
+package internal
 
 import (
-	"todox/internal/app/config"
-
 	"github.com/leapkit/core/db"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -10,4 +8,4 @@ import (
 // Connection is the database connection builder function
 // that will be used by the application based on the driver and
 // connection string.
-var Connection = db.ConnectionFn(config.DatabaseURL, db.WithDriver("sqlite3"))
+var Connection = db.ConnectionFn(DatabaseURL, db.WithDriver("sqlite3"))

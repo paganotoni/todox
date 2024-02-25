@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"todox/internal/app/config"
-	"todox/internal/app/database"
-	"todox/internal/app/database/migrations"
+	"todox/internal"
+	"todox/internal/migrations"
 
 	"github.com/leapkit/core/db"
 )
@@ -24,7 +23,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "migrate":
-		conn, err := database.Connection()
+		conn, err := internal.Connection()
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -39,7 +38,7 @@ func main() {
 
 		fmt.Println("✅ Migrations ran successfully")
 	case "create":
-		err := db.Create(config.DatabaseURL)
+		err := db.Create(internal.DatabaseURL)
 		if err != nil {
 			fmt.Println(err)
 
@@ -49,7 +48,7 @@ func main() {
 		fmt.Println("✅ Database created successfully")
 
 	case "drop":
-		err := db.Drop(config.DatabaseURL)
+		err := db.Drop(internal.DatabaseURL)
 		if err != nil {
 			fmt.Println(err)
 
