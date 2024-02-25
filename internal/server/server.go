@@ -15,18 +15,19 @@ type Root struct {
 func New(options ...Option) *Root {
 	ss := &Root{
 		RouteGroup: &RouteGroup{
-			prefix: "",
-			mux:    http.NewServeMux(),
-			middleware: []func(http.Handler) http.Handler{
-				setValuer,
-				recoverer,
-				logger,
-			},
+			prefix:     "",
+			mux:        http.NewServeMux(),
+			middleware: []func(http.Handler) http.Handler{},
 		},
 
 		host: "0.0.0.0",
 		port: "3000",
 	}
+
+	ss.Use(logger)
+	ss.Use(recoverer)
+	ss.Use(requestID)
+	ss.Use(setValuer)
 
 	for _, option := range options {
 		option(ss)

@@ -23,14 +23,17 @@ func AddRoutes(r *server.Root) error {
 	r.Use(session.Middleware(sessionSecret, sessionName))
 	r.Use(render.Middleware(Templates, render.WithDefaultLayout("layout.html")))
 
-	r.HandleFunc("GET /", todos.Index)
+	r.HandleFunc("GET /{$}", todos.Index)
 	r.HandleFunc("GET /search", todos.Search)
-	r.HandleFunc("GET /{id}/edit", todos.Edit)
-	r.HandleFunc("GET /{id}/show", todos.Show)
-	r.HandleFunc("POST /", todos.Create)
-	r.HandleFunc("DELETE /{id}", todos.Delete)
-	r.HandleFunc("PUT /{id}", todos.Update)
-	r.HandleFunc("PUT /{id}/complete", todos.Complete)
+	r.HandleFunc("POST /{$}", todos.Create)
+
+	r.Group("/{id}/", func(wid *server.RouteGroup) {
+		wid.HandleFunc("GET /edit", todos.Edit)
+		wid.HandleFunc("GET /show", todos.Show)
+		wid.HandleFunc("DELETE /{$}", todos.Delete)
+		wid.HandleFunc("PUT /{$}", todos.Update)
+		wid.HandleFunc("PUT /complete", todos.Complete)
+	})
 
 	// Mount the public folder to be served openly
 	r.Folder("/public", public.Files)
