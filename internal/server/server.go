@@ -15,6 +15,7 @@ type Root struct {
 	port string
 }
 
+// New creates a new server with the given options and default middleware.
 func New(options ...Option) *Root {
 	ss := &Root{
 		RouteGroup: &RouteGroup{
