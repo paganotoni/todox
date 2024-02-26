@@ -20,6 +20,5 @@ require (
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gorilla/sessions v1.2.2 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	golang.org/x/sys v0.17.0 // indirect
 )
