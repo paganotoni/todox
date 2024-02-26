@@ -14,7 +14,6 @@ import (
 )
 
 var (
-
 	//go:embed **/*.html *.html
 	tmpls     embed.FS
 	templates = mdfs.New(tmpls, "internal", envor.Get("GO_ENV", "development"))
@@ -29,7 +28,10 @@ func AddRoutes(r *server.Root) error {
 		envor.Get("SESSION_NAME", "todox_session"),
 	))
 
-	r.Use(render.Middleware(templates, render.WithDefaultLayout("layout.html")))
+	r.Use(render.Middleware(
+		templates,
+		render.WithDefaultLayout("layout.html")),
+	)
 
 	r.HandleFunc("GET /{$}", todos.Index)
 	r.HandleFunc("GET /search", todos.Search)
