@@ -17,7 +17,7 @@ func main() {
 	}
 
 	fmt.Println("✅ Tailwind CSS setup successfully")
-	conn, err := internal.Connection()
+	conn, err := internal.DB()
 	if err != nil {
 		fmt.Println(err)
 		return

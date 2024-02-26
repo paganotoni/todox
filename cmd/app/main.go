@@ -6,13 +6,14 @@ import (
 	"os"
 	"todox/internal"
 
+	"github.com/leapkit/core/envor"
 	"github.com/leapkit/core/server"
 )
 
 func main() {
 	server := server.New(
-		server.WithHost(internal.Host),
-		server.WithPort(internal.Port),
+		server.WithHost(envor.Get("PORT", "3000")),
+		server.WithPort(envor.Get("HOST", "0.0.0.0")),
 	)
 
 	// Application services

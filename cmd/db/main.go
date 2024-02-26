@@ -23,7 +23,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "migrate":
-		conn, err := internal.Connection()
+		conn, err := internal.DB()
 		if err != nil {
 			fmt.Println(err)
 			return

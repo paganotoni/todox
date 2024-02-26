@@ -11,7 +11,7 @@ import (
 // AddServices is a function that will be called by the server
 // to inject services in the context.
 func AddServices(r *server.Root) error {
-	conn, err := Connection()
+	conn, err := DB()
 	if err != nil {
 		return err
 	}

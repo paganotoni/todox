@@ -1,9 +1,11 @@
 package internal
 
 import (
+	"embed"
 	"todox/internal/todos"
 	"todox/public"
 
+	"github.com/leapkit/core/mdfs"
 	"github.com/leapkit/core/server"
 
 	"github.com/leapkit/core/envor"
@@ -15,6 +17,10 @@ var (
 	// Session options.
 	sessionName   = envor.Get("SESSION_NAME", "todox_session")
 	sessionSecret = envor.Get("SESSION_SECRET", "secret_key")
+
+	//go:embed **/*.html *.html
+	tmpls     embed.FS
+	templates = mdfs.New(tmpls, "internal", envor.Get("GO_ENV", "development"))
 )
 
 // AddRoutes mounts the routes for the application,
@@ -22,7 +28,7 @@ var (
 // in the creation of the server instance.
 func AddRoutes(r *server.Root) error {
 	r.Use(session.Middleware(sessionSecret, sessionName))
-	r.Use(render.Middleware(Templates, render.WithDefaultLayout("layout.html")))
+	r.Use(render.Middleware(templates, render.WithDefaultLayout("layout.html")))
 
 	r.HandleFunc("GET /{$}", todos.Index)
 	r.HandleFunc("GET /search", todos.Search)
