@@ -12,8 +12,8 @@ import (
 
 func main() {
 	server := server.New(
-		server.WithHost(envor.Get("PORT", "3000")),
-		server.WithPort(envor.Get("HOST", "0.0.0.0")),
+		server.WithHost(envor.Get("HOST", "0.0.0.0")),
+		server.WithPort(envor.Get("PORT", "3000")),
 	)
 
 	// Application services
