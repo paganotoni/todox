@@ -1,9 +1,10 @@
 package internal
 
 import (
-	"todox/internal/server"
 	"todox/internal/todos"
 	"todox/public"
+
+	"github.com/leapkit/core/server"
 
 	"github.com/leapkit/core/envor"
 	"github.com/leapkit/core/render"

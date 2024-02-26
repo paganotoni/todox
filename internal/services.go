@@ -1,8 +1,9 @@
 package internal
 
 import (
-	"todox/internal/server"
 	"todox/internal/todos"
+
+	"github.com/leapkit/core/server"
 
 	lserver "github.com/leapkit/core/server"
 )

@@ -5,7 +5,8 @@ import (
 	"log/slog"
 	"os"
 	"todox/internal"
-	"todox/internal/server"
+
+	"github.com/leapkit/core/server"
 )
 
 func main() {
