@@ -10,7 +10,7 @@ import (
 
 // AddServices is a function that will be called by the server
 // to inject services in the context.
-func AddServices(r *server.Root) error {
+func AddServices(r server.Router) error {
 	conn, err := DB()
 	if err != nil {
 		return err

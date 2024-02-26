@@ -31,7 +31,7 @@ var (
 // AddRoutes mounts the routes for the application,
 // it assumes that the base services have been injected
 // in the creation of the server instance.
-func AddRoutes(r *server.Root) error {
+func AddRoutes(r server.Router) error {
 	// Session middleware to be used by the application
 	// to store session data.
 	r.Use(session.Middleware(
@@ -50,7 +50,7 @@ func AddRoutes(r *server.Root) error {
 	r.HandleFunc("GET /search", todos.Search)
 	r.HandleFunc("POST /{$}", todos.Create)
 
-	r.Group("/{id}/", func(wid *server.HandlerGroup) {
+	r.Group("/{id}/", func(wid server.Router) {
 		wid.HandleFunc("GET /edit", todos.Edit)
 		wid.HandleFunc("GET /show", todos.Show)
 		wid.HandleFunc("DELETE /{$}", todos.Delete)

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log/slog"
+	"net/http"
 	"os"
 	"todox/internal"
 
@@ -28,7 +29,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := server.Start(); err != nil {
+	slog.Info(fmt.Sprintf("> Starting todox at %s", server.Addr()))
+	if err := http.ListenAndServe(server.Addr(), server.Handler()); err != nil {
 		slog.Error(fmt.Sprintf("Server terminated: %v", err.Error()))
 	}
 }
