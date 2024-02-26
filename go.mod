@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/leapkit/core v1.2.13-0.20240226151548-50722716996d
+	github.com/leapkit/core v1.2.13-0.20240226205002-76fa67bc6c43
 	github.com/mattn/go-sqlite3 v1.14.19
 	github.com/paganotoni/tailo v1.0.3
 )
