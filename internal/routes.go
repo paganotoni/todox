@@ -15,19 +15,32 @@ import (
 
 var (
 	//go:embed **/*.html *.html
-	tmpls     embed.FS
-	templates = mdfs.New(tmpls, "internal", envor.Get("GO_ENV", "development"))
+	tmpls embed.FS
+
+	// templates FS used by the application to render
+	// the html templates. It uses mdfs to fallback to
+	// the directory where the templates are located in
+	// development mode.
+	templates = mdfs.New(
+		tmpls,
+		"internal",
+		envor.Get("GO_ENV", "development"),
+	)
 )
 
 // AddRoutes mounts the routes for the application,
 // it assumes that the base services have been injected
 // in the creation of the server instance.
 func AddRoutes(r *server.Root) error {
+	// Session middleware to be used by the application
+	// to store session data.
 	r.Use(session.Middleware(
 		envor.Get("SESSION_SECRET", "secret_key"),
 		envor.Get("SESSION_NAME", "todox_session"),
 	))
 
+	// Render middleware to build the html templates
+	// and serve them to the client.
 	r.Use(render.Middleware(
 		templates,
 		render.WithDefaultLayout("layout.html")),
