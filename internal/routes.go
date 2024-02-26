@@ -14,9 +14,6 @@ import (
 )
 
 var (
-	// Session options.
-	sessionName   = envor.Get("SESSION_NAME", "todox_session")
-	sessionSecret = envor.Get("SESSION_SECRET", "secret_key")
 
 	//go:embed **/*.html *.html
 	tmpls     embed.FS
@@ -27,7 +24,11 @@ var (
 // it assumes that the base services have been injected
 // in the creation of the server instance.
 func AddRoutes(r *server.Root) error {
-	r.Use(session.Middleware(sessionSecret, sessionName))
+	r.Use(session.Middleware(
+		envor.Get("SESSION_SECRET", "secret_key"),
+		envor.Get("SESSION_NAME", "todox_session"),
+	))
+
 	r.Use(render.Middleware(templates, render.WithDefaultLayout("layout.html")))
 
 	r.HandleFunc("GET /{$}", todos.Index)
