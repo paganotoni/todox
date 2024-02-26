@@ -13,7 +13,6 @@ require (
 require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/go-chi/chi/v5 v5.0.10 // indirect
 	github.com/go-playground/form/v4 v4.2.1 // indirect
 	github.com/gobuffalo/flect v0.3.0 // indirect
 	github.com/gobuffalo/tags/v3 v3.1.4 // indirect
