@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/leapkit/core/form"
-	"github.com/leapkit/core/render"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -32,11 +31,5 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rw := render.FromCtx(r.Context())
-	rw.Set("list", list)
-
-	err = rw.RenderClean("todos/list.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	todoListHTML(list).Render(w)
 }

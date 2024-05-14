@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
-	"github.com/leapkit/core/render"
 )
 
 func Show(w http.ResponseWriter, r *http.Request) {
@@ -17,13 +16,5 @@ func Show(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rw := render.FromCtx(r.Context())
-	rw.Set("todo", todo)
-
-	err = rw.RenderClean("todos/todo.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return
-	}
+	todoHTML(todo).Render(w)
 }

@@ -1,30 +1,35 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
 	"todox/internal"
 
-	"github.com/leapkit/core/envor"
 	"github.com/leapkit/core/server"
+
+	// Load environment variables
+	_ "github.com/leapkit/core/envload"
+
+	// sqlite3 driver
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	server := server.New(
-		server.WithHost(envor.Get("HOST", "0.0.0.0")),
-		server.WithPort(envor.Get("PORT", "3000")),
-	)
-
-	// Application services
-	if err := internal.AddServices(server); err != nil {
-		slog.Error(err.Error())
-		os.Exit(1)
+	db, err := internal.DB()
+	if err != nil {
+		panic(err)
 	}
 
+	server := server.New(
+		server.WithHost(cmp.Or(os.Getenv("HOST"), "0.0.0.0")),
+		server.WithPort(cmp.Or(os.Getenv("PORT"), "3000")),
+	)
+
 	// Application routes
-	if err := internal.AddRoutes(server); err != nil {
+	if err := internal.SetupRoutes(server, db); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}

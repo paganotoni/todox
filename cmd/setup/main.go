@@ -7,6 +7,7 @@ import (
 	"todox/internal/migrations"
 
 	"github.com/leapkit/core/db"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/paganotoni/tailo"
 )
 

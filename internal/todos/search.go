@@ -2,8 +2,6 @@ package todos
 
 import (
 	"net/http"
-
-	"github.com/leapkit/core/render"
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
@@ -15,11 +13,6 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rw := render.FromCtx(r.Context())
-	rw.Set("list", list)
-
-	err = rw.RenderClean("todos/list.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	html := todoListHTML(list)
+	html.Render(w)
 }
