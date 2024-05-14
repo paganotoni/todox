@@ -54,7 +54,7 @@ func (s *service) Search(term string) ([]Instance, error) {
 		return list, err
 	}
 
-	err = conn.Select(&list, "SELECT * FROM todos WHERE content LIKE $1", "%"+term+"%")
+	err = conn.Select(&list, "SELECT * FROM todos WHERE content LIKE $1 ORDER BY completed ASC", "%"+term+"%")
 	return list, err
 }
 

@@ -21,7 +21,7 @@ func todoHTML(t Instance) ElementRenderer {
 			),
 		),
 		SPAN().CLASS("flex-grow items-center").Children(content),
-		SPAN().CLASS("bg-red-500 text-white py-2 px-3 rounded cursor-pointer").Text("Delete").Attr("hx-delete", "/"+t.ID.String()).Attr("hx-target", "#element_"+t.ID.String()).Attr("hx-swap", "outerHTML").Attr("hx-confirm", "Are you sure you wish to delete this TODO?").Attr("_", "on htmx:afterRequest if detail.successful send keyup to #search"),
+		SPAN().CLASS("bg-red-500 text-white py-2 px-3 rounded cursor-pointer").Text("Delete").Attr("hx-delete", "/"+t.ID.String()).Attr("hx-target", "closest li").Attr("hx-swap", "outerHTML").Attr("hx-confirm", "Are you sure you wish to delete this TODO?").Attr("_", "on htmx:afterRequest if detail.successful send keyup to #search"),
 	)
 }
 

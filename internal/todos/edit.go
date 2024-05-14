@@ -20,10 +20,10 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	}
 
 	el := LI().CLASS("gap-3 bg-white items-center rounded gap-2 p-3").Children(
-		FORM().CLASS("flex flex-row gap-3").Children(
+		FORM().CLASS("flex flex-row gap-3 mb-0").Children(
 			INPUT().VALUE(todo.Content).TYPE("text").NAME("content").CLASS("p-2 border rounded flex-grow"),
 			BUTTON().CLASS("p-2 px-3 bg-green-500 text-white rounded").Text("Save"),
-		).Attr("hx-put", "/"+todo.ID.String()).Attr("hx-swap", "outerHTML"),
+		).Attr("hx-put", "/"+todo.ID.String()).Attr("hx-swap", "outerHTML").Attr("hx-target", "closest li"),
 	).Attr("hx-get", "/"+todo.ID.String()+"/show").Attr("hx-swap", "outerHTML").Attr("hx-trigger", "keyup[event.keyCode==27] from:window")
 	el.Render(w)
 }
