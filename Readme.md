@@ -13,6 +13,7 @@ TODOx is a todo list app built with Go, HTMX, Tailwind CSS and SQLite to store t
 The stack aims to be as simple as possible. It consists of:
 
 - Go is the main language.
+- Gostar to build the html.
 - HTMX for the interactions with the user.
 - Tailwind CSS with the Standalone CLI for styling.
 - SQLite as the database.
@@ -26,13 +27,13 @@ The Tailwind CSS Standalone CLI takes care of the styling by processing html fil
 ## Running in development
 
 ### Setup
-In order to install the app in development you should download the tailwind css standalone CLI and air for hot reloading. You can do this by running the following command:
+In order to run the app in development you should run the setup cli, it will download the standalone CLI. You can do this by running the following command:
 
 ```
 go run ./cmd/setup
 ```
 
-### Running 
+### Running
 To run the app in development you can run the following command:
 
 ```
@@ -43,11 +44,11 @@ And visit http://localhost:3000 to see the app running.
 
 ## Deploying
 
-The app contains a Dockerfile that can be used to build images and deploy to any container platform. 
+The app contains a Dockerfile that can be used to build images and deploy to any container platform.
 
 A few environment variables to consider are:
 
 ```
-GO_ENV                          - The environment the app is running in. Defaults "development"
-PORT                            - The port the app will run on. Defaults "3000"
+GO_ENV  - The environment the app is running in (def: development)
+PORT    - The port the app will run on. Defaults "3000"
 ```
