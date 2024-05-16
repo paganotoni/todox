@@ -2,3 +2,4 @@ cmd/tailwindcss
 tmp
 bin
 todox.db**
+public/application.css
