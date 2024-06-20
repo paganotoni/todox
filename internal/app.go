@@ -9,8 +9,8 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/leapkit/core/assets"
 	"github.com/leapkit/core/db"
-	"github.com/leapkit/core/gloves"
 	"github.com/leapkit/core/server"
+	"github.com/leapkit/core/tools/rebuilder"
 	"github.com/paganotoni/tailo"
 
 	"github.com/leapkit/core/session"
@@ -31,7 +31,6 @@ var (
 	// when changes are made.
 	Assets = assets.NewManager(public.Files)
 
-
 	// TailoOptions allow to define how to compile
 	// the tailwind css files, which is the input and
 	// what will be the output.
@@ -43,12 +42,12 @@ var (
 
 	// GlovesOptions are the options that will be used by the gloves
 	// tool to hot reload the application.
-	GlovesOptions = []gloves.Option{
+	GlovesOptions = []rebuilder.Option{
 		// Run the tailo watcher so when changes are made to
 		// the html code it rebuilds css.
-		gloves.WithRunner(tailo.WatcherFn(TailoOptions...)),
-		gloves.WithRunner(Assets.Watch),
-		gloves.WatchExtension(".go", ".css", ".js"),
+		rebuilder.WithRunner(tailo.WatcherFn(TailoOptions...)),
+		rebuilder.WithRunner(Assets.Watch),
+		rebuilder.WatchExtension(".go", ".css", ".js"),
 	}
 )
 

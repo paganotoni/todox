@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"todox/internal"
 
-	"github.com/leapkit/core/gloves"
+	"github.com/leapkit/core/tools/rebuilder"
 )
 
 func main() {
-	err := gloves.Start(
+	err := rebuilder.Start(
 		"cmd/app/main.go",
 
 		internal.GlovesOptions...,
