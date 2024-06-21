@@ -10,7 +10,6 @@ import (
 	"github.com/leapkit/core/assets"
 	"github.com/leapkit/core/db"
 	"github.com/leapkit/core/server"
-	"github.com/leapkit/core/tools/rebuilder"
 	"github.com/paganotoni/tailo"
 
 	"github.com/leapkit/core/session"
@@ -40,15 +39,7 @@ var (
 		tailo.UseConfigPath("tailwind.config.js"),
 	}
 
-	// GlovesOptions are the options that will be used by the gloves
-	// tool to hot reload the application.
-	GlovesOptions = []rebuilder.Option{
-		// Run the tailo watcher so when changes are made to
-		// the html code it rebuilds css.
-		rebuilder.WithRunner(tailo.WatcherFn(TailoOptions...)),
-		rebuilder.WithRunner(Assets.Watch),
-		rebuilder.WatchExtension(".go", ".css", ".js"),
-	}
+	TailoWatcher = tailo.WatcherFn(TailoOptions...)
 )
 
 // AddRoutes mounts the routes for the application,
