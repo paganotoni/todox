@@ -34,10 +34,10 @@ go run ./cmd/setup
 ```
 
 ### Running
-To run the app in development you can run the following command:
+To run the app in development mode (with hot recompile) you can run the following command:
 
 ```
-go run ./cmd/dev
+kit dev
 ```
 
 And visit http://localhost:3000 to see the app running.

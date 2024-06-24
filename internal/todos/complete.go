@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
-	"github.com/leapkit/core/form"
+	"github.com/leapkit/leapkit/core/form"
 )
 
 func Complete(w http.ResponseWriter, r *http.Request) {

@@ -6,8 +6,15 @@ ADD go.mod .
 RUN go mod download
 
 ADD . .
-RUN go build -o bin/db ./cmd/db
-RUN go run ./cmd/build
+
+# Building TailwindCSS with tailo
+RUN go run github.com/paganotoni/tailo/cmd/build@a4899cd
+
+# Installing kit
+RUN go install github.com/leapkit/leapkit/kit@v0.0.5
+
+# Building the app
+RUN go build -tags osusergo,netgo -buildvcs=false -o bin/app ./cmd/app
 
 FROM alpine
 RUN apk add --no-cache ca-certificates
@@ -15,7 +22,7 @@ RUN apk add --no-cache ca-certificates
 WORKDIR /bin/
 
 # Copying binaries
+COPY --from=builder /go/bin/kit .
 COPY --from=builder /src/todox/bin/app .
-COPY --from=builder /src/todox/bin/db .
 
-CMD /bin/db migrate && /bin/app
+CMD kit db migrate && /bin/app
