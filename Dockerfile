@@ -24,6 +24,8 @@ WORKDIR /bin/
 # Copying binaries
 COPY --from=builder /go/bin/kit .
 COPY --from=builder /src/todox/bin/app .
+
+# Copying migrations folder
 COPY --from=builder /src/todox/internal/migrations migrations
 
 CMD kit db migrate --migrations.folder=migrations && app
