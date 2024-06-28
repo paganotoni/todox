@@ -10,8 +10,6 @@ import (
 	"github.com/leapkit/leapkit/core/assets"
 	"github.com/leapkit/leapkit/core/db"
 	"github.com/leapkit/leapkit/core/server"
-
-	"github.com/leapkit/leapkit/core/session"
 )
 
 var (
@@ -36,14 +34,11 @@ func New() Server {
 	r := server.New(
 		server.WithHost(cmp.Or(os.Getenv("HOST"), "0.0.0.0")),
 		server.WithPort(cmp.Or(os.Getenv("PORT"), "3000")),
+		server.WithSession(
+			cmp.Or(os.Getenv("SESSION_SECRET"), "secret_key"),
+			cmp.Or(os.Getenv("SESSION_NAME"), "todox_session"),
+		),
 	)
-
-	// Session middleware to be used by the application
-	// to store session data.
-	r.Use(session.Middleware(
-		cmp.Or(os.Getenv("SESSION_SECRET"), "secret_key"),
-		cmp.Or(os.Getenv("SESSION_NAME"), "todox_session"),
-	))
 
 	// Inject the todoService into the context
 	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DB)))

@@ -6,7 +6,7 @@ require (
 	github.com/delaneyj/gostar v0.7.2
 	github.com/gofrs/uuid/v5 v5.2.0
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/leapkit/leapkit/core v0.0.2
+	github.com/leapkit/leapkit/core v0.0.3
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/paganotoni/tailo v1.0.3
 )
