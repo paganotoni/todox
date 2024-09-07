@@ -4,8 +4,8 @@ servers:
   web:
     hosts:
       - 178.156.136.27
-    # options:
-    #   "add-host": host.docker.internal:host-gateway
+    options:
+      "add-host": host.docker.internal:host-gateway
     labels:
       traefik.http.services.todox-web.loadbalancer.server.port: 3000
       traefik.http.routers.todox.rule: "Host(`todox.antoniopagano.com`)"
