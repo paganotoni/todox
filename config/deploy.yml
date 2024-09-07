@@ -34,7 +34,7 @@ env:
     - SESSION_NAME
 
 healthcheck:
-  cmd: wget -qO- http://localhost:3002/health
+  cmd: wget -qO- http://localhost:3000/health
   max_attempts: 3
 
 traefik:
