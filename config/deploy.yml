@@ -7,7 +7,7 @@ servers:
     options:
       "add-host": host.docker.internal:host-gateway
     labels:
-      traefik.http.services.todox-web.loadbalancer.server.port: 3000
+      traefik.http.services.todox-web.loadbalancer.server.port: 3003
       traefik.http.routers.todox.rule: "Host(`todox.antoniopagano.com`)"
       traefik.http.routers.todox_secure.rule: "Host(`todox.antoniopagano.com`)"
       traefik.http.routers.todox_secure.entrypoints: websecure
@@ -25,7 +25,7 @@ registry:
 
 env:
   clear:
-    PORT: 3000
+    PORT: 3003
     HOST: 0.0.0.0
     GO_ENV: production
     DATABASE_URL: /data/todox/database.db
@@ -34,7 +34,7 @@ env:
     - SESSION_NAME
 
 healthcheck:
-  cmd: wget -qO- http://localhost:3000/health
+  cmd: wget -qO- http://localhost:3003/health
   max_attempts: 3
 
 traefik:
