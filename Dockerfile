@@ -1,4 +1,4 @@
-FROM golang:1.22-alpine as builder
+FROM golang:1.22-alpine AS builder
 RUN apk --update add build-base curl
 
 WORKDIR /src/todox
@@ -7,11 +7,14 @@ RUN go mod download
 
 ADD . .
 
-# Building TailwindCSS with tailo
-RUN go run github.com/paganotoni/tailo/cmd/build@a4899cd
+# Copy everything in assets to the public folder
+RUN cp internal/assets/* public/
 
-# Installing kit
-RUN go install github.com/leapkit/leapkit/kit@v0.0.7
+# Building TailwindCSS with tailo
+RUN go run github.com/paganotoni/tailo/cmd/build@v1.0.8
+
+# Building the migrate command
+RUN go build -tags osusergo,netgo -buildvcs=false -o bin/migrate ./cmd/migrate
 
 # Building the app
 RUN go build -tags osusergo,netgo -buildvcs=false -o bin/app ./cmd/app
@@ -22,10 +25,8 @@ RUN apk add --no-cache ca-certificates
 WORKDIR /bin/
 
 # Copying binaries
-COPY --from=builder /go/bin/kit .
+COPY --from=builder /src/todox/bin/migrate .
 COPY --from=builder /src/todox/bin/app .
 
-# Copying migrations folder
-COPY --from=builder /src/todox/internal/migrations migrations
-
-CMD kit db migrate --migrations.folder=migrations && app
+SHELL ["/bin/ash", "-c"]
+CMD migrate && app

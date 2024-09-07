@@ -7,7 +7,6 @@ import (
 	"todox/internal/todos"
 	"todox/public"
 
-	"github.com/leapkit/leapkit/core/assets"
 	"github.com/leapkit/leapkit/core/db"
 	"github.com/leapkit/leapkit/core/server"
 )
@@ -34,6 +33,8 @@ func New() Server {
 	r := server.New(
 		server.WithHost(cmp.Or(os.Getenv("HOST"), "0.0.0.0")),
 		server.WithPort(cmp.Or(os.Getenv("PORT"), "3000")),
+		server.WithAssets(public.Files),
+
 		server.WithSession(
 			cmp.Or(os.Getenv("SESSION_SECRET"), "secret_key"),
 			cmp.Or(os.Getenv("SESSION_NAME"), "todox_session"),
@@ -44,21 +45,16 @@ func New() Server {
 	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DB)))
 
 	r.HandleFunc("GET /{$}", todos.Index)
-	r.HandleFunc("GET /search", todos.Search)
-	r.HandleFunc("POST /{$}", todos.Create)
 
-	r.Group("/{id}/", func(wid server.Router) {
-		wid.HandleFunc("GET /edit", todos.Edit)
-		wid.HandleFunc("GET /show", todos.Show)
-		wid.HandleFunc("DELETE /{$}", todos.Delete)
-		wid.HandleFunc("PUT /{$}", todos.Update)
-		wid.HandleFunc("PUT /complete", todos.Complete)
+	r.Group("/todos", func(r server.Router) {
+		r.HandleFunc("GET /search", todos.Search)
+		r.HandleFunc("POST /{$}", todos.Create)
+		r.HandleFunc("GET /{id}/edit", todos.Edit)
+		r.HandleFunc("GET /{id}/show", todos.Show)
+		r.HandleFunc("DELETE /{id}/{$}", todos.Delete)
+		r.HandleFunc("PUT /{id}/{$}", todos.Update)
+		r.HandleFunc("PUT /{id}/complete", todos.Complete)
 	})
-
-	// Mounting the assets manager at the end of the routes
-	// so that it can serve the public assets.
-	assetManager := assets.NewManager(public.Files)
-	r.HandleFunc(assetManager.HandlerPattern(), assetManager.HandlerFn)
 
 	return r
 }

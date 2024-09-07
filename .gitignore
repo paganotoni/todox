@@ -1,6 +1,6 @@
 cmd/tailwindcss
 tmp
 bin
-todox.db**
+*.db**
 public/application.css
 .env
