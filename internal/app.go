@@ -45,6 +45,7 @@ func New() Server {
 	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DB)))
 
 	r.HandleFunc("GET /{$}", todos.Index)
+	r.HandleFunc("GET /health", health)
 
 	r.Group("/todos", func(r server.Router) {
 		r.HandleFunc("GET /search", todos.Search)
