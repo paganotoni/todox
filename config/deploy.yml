@@ -3,7 +3,7 @@ image: paganotoni/todox
 servers:
   web:
     hosts:
-      - ENV['PRODUCTION_SERVER_IP']
+      - <%= ENV['PRODUCTION_SERVER_IP'] %>
     options:
       "add-host": host.docker.internal:host-gateway
     labels:
