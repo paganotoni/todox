@@ -3,7 +3,7 @@ image: paganotoni/todox
 servers:
   web:
     hosts:
-      - 178.156.136.27
+      - PRODUCTION_SERVER_IP
     options:
       "add-host": host.docker.internal:host-gateway
     labels:
