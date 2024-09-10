@@ -15,6 +15,7 @@ jobs:
       GO_ENV: production
       KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+      PRODUCTION_SERVER_IP: ${{ secrets.PRODUCTION_SERVER_IP }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
