@@ -2,7 +2,8 @@ service: todox
 image: paganotoni/todox
 servers:
   web:
-    host: <%= ENV['PRODUCTION_SERVER_IP'] %>
+    hosts:
+      - <%= ENV['PRODUCTION_SERVER_IP'] %>
     options:
       cpus: 0.5
 
