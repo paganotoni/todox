@@ -24,6 +24,7 @@ env:
 
 proxy:
   host: todox.antoniopagano.com
+  forward_headers: true
   ssl: true
   app_port: 3000
   healthcheck:
