@@ -13,7 +13,7 @@ TODOx is a todo list app built with Go, HTMX, Tailwind CSS and SQLite to store t
 The stack aims to be as simple as possible. It consists of:
 
 - Go is the main language.
-- Gomponents to build the HTML.
+- Gomponents to render our HTML on the server.
 - HTMX for the interactions with the user.
 - Tailwind CSS for styling (CDN).
 - SQLite as the database.
