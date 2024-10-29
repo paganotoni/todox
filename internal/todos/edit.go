@@ -4,8 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
+	. "maragu.dev/gomponents"
+	. "maragu.dev/gomponents/html"
 
-	. "github.com/delaneyj/gostar/elements"
+	hx "maragu.dev/gomponents-htmx"
 )
 
 func Edit(w http.ResponseWriter, r *http.Request) {
@@ -19,11 +21,29 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	el := LI().CLASS("gap-3 bg-white items-center rounded gap-2 p-3").Children(
-		FORM().CLASS("flex flex-row gap-3 mb-0").Children(
-			INPUT().VALUE(todo.Content).TYPE("text").NAME("content").CLASS("p-2 border rounded flex-grow"),
-			BUTTON().CLASS("p-2 px-3 bg-green-500 text-white rounded").Text("Save"),
-		).Attr("hx-put", "/todos/"+todo.ID.String()).Attr("hx-swap", "outerHTML").Attr("hx-target", "closest li"),
-	).Attr("hx-get", "/todos/"+todo.ID.String()+"/show").Attr("hx-swap", "outerHTML").Attr("hx-trigger", "keyup[event.keyCode==27] from:window")
+	el := Li(
+		Class("gap-3 bg-white items-center rounded gap-2 p-3"),
+
+		hx.Get("/todos/"+todo.ID.String()+"/show"),
+		hx.Swap("outerHTML"),
+		hx.Trigger("keyup[event.keyCode==27] from:window"),
+
+		Form(
+			Class("flex flex-row gap-3 mb-0"),
+
+			hx.Put("/todos/"+todo.ID.String()),
+			hx.Swap("outerHTML"),
+			hx.Target("closest li"),
+
+			Input(
+				Value(todo.Content), Type("text"), Name("content"), Class("p-2 border rounded flex-grow"),
+			),
+			Button(
+				Class("p-2 px-3 bg-green-500 text-white rounded"),
+				Text("Save"),
+			),
+		),
+	)
+
 	el.Render(w)
 }

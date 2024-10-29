@@ -1,21 +1,30 @@
 package todos
 
-import . "github.com/delaneyj/gostar/elements"
+import (
+	. "maragu.dev/gomponents"
+	. "maragu.dev/gomponents/html"
+)
 
-func page(yield ElementRenderer) ElementRenderer {
-	return HTML().Children(
-		HEAD().Children(
-			META().NAME("viewport").CONTENT("width=device-width, initial-scale=1"),
-			META().CHARSET("utf-8"),
-			TITLE().Text("Todo"),
-			SCRIPT().SRC("https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js"),
-			SCRIPT().SRC("https://unpkg.com/hyperscript.org@0.9.8"),
+func page(yield Node) Node {
+	return HTML(
+		Head(
+			Meta(Name("viewport"), Content("width=device-width, initial-scale=1")),
+			Meta(Charset("utf-8")),
 
-			LINK().REL("stylesheet").HREF("/public/application.css"),
+			TitleEl(Text("TodoX")),
+			Script(Src("https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js")),
+			Script(Src("https://unpkg.com/hyperscript.org@0.9.8")),
+			Script(Src("https://cdn.tailwindcss.com?plugins=forms,typography,line-clamp")),
 		),
-		BODY().CLASS("h-full bg-gray-100 pb-10 pt-10").Children(
-			DIV().CLASS("max-w-[1500px] mx-auto px-5").Children(
-				H1().CLASS("text-2xl mb-2 font-bold").Text("Todo List"),
+
+		Body(
+			Class("h-full bg-gray-100 pb-10 pt-10"),
+			Div(
+				Class("max-w-[1500px] mx-auto px-5"),
+				H1(
+					Class("text-2xl mb-2 font-bold"),
+					Text("TodoX List"),
+				),
 
 				// here goes the thing you want to render.
 				yield,
