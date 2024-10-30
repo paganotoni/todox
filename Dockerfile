@@ -1,7 +1,8 @@
-FROM golang:1.22-alpine AS builder
+FROM golang:1.23-alpine AS builder
 RUN apk --update add build-base curl
 
 WORKDIR /src/todox
+
 ADD go.mod .
 RUN go mod download
 
