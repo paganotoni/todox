@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
-	"github.com/leapkit/leapkit/core/form"
+	"github.com/leapkit/leapkit/core/server"
 )
 
 func Complete(w http.ResponseWriter, r *http.Request) {
@@ -13,20 +13,15 @@ func Complete(w http.ResponseWriter, r *http.Request) {
 	id := uuid.FromStringOrNil(r.PathValue("id"))
 	todo, err := todos.Find(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}
 
-	err = form.Decode(r, &todo)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
+	todo.Completed = r.FormValue("Completed") != "false"
 	err = todos.SetCompleted(todo.ID, todo.Completed)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}

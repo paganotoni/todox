@@ -3,6 +3,7 @@ package todos
 import (
 	"net/http"
 
+	"github.com/leapkit/leapkit/core/server"
 	. "maragu.dev/gomponents"
 	. "maragu.dev/gomponents/html"
 
@@ -14,7 +15,8 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	list, err := todos.List()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
+
 		return
 	}
 

@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
+	"github.com/leapkit/leapkit/core/server"
 )
 
 func Update(w http.ResponseWriter, r *http.Request) {
@@ -12,7 +13,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	id := uuid.FromStringOrNil(r.PathValue("id"))
 	todo, err := todos.Find(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}
@@ -22,7 +23,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	err = todos.Update(&todo)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}

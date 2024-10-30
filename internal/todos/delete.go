@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
+	"github.com/leapkit/leapkit/core/server"
 )
 
 func Delete(w http.ResponseWriter, r *http.Request) {
@@ -12,7 +13,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	id := uuid.FromStringOrNil(r.PathValue("id"))
 	err := todos.Delete(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}

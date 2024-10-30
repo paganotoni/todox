@@ -2,6 +2,8 @@ package todos
 
 import (
 	"net/http"
+
+	"github.com/leapkit/leapkit/core/server"
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
@@ -9,7 +11,8 @@ func Search(w http.ResponseWriter, r *http.Request) {
 
 	list, err := todos.Search(r.FormValue("keyword"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
+
 		return
 	}
 

@@ -3,15 +3,19 @@ package todos
 import (
 	"net/http"
 
-	"github.com/leapkit/leapkit/core/form"
+	"github.com/leapkit/leapkit/core/server"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
-	todo := Instance{}
-	err := form.Decode(r, &todo)
+	err := r.ParseForm()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
+
 		return
+	}
+
+	todo := Instance{
+		Content: r.FormValue("Content"),
 	}
 
 	todo.Completed = false
@@ -19,14 +23,14 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 	err = todos.Create(&todo)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}
 
 	list, err := todos.List()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}

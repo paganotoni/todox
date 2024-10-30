@@ -12,7 +12,6 @@ require (
 )
 
 require (
-	github.com/go-playground/form/v4 v4.2.1 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gorilla/sessions v1.3.0 // indirect
 )

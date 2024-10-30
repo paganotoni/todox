@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
+	"github.com/leapkit/leapkit/core/server"
 	. "maragu.dev/gomponents"
 	. "maragu.dev/gomponents/html"
 
@@ -16,7 +17,7 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	id := uuid.FromStringOrNil(r.PathValue("id"))
 	todo, err := todos.Find(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		server.Error(w, err, http.StatusInternalServerError)
 
 		return
 	}
