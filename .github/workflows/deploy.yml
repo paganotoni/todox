@@ -21,7 +21,7 @@ jobs:
         with:
           ruby-version: 3.3.0
           bundler-cache: true
-      - run: gem install kamal -v 2.4.0
+      - run: gem install kamal -v 2.5.2
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
