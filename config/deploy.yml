@@ -5,7 +5,7 @@ servers:
     hosts:
       - <%= ENV['PRODUCTION_SERVER_IP'] %>
     options:
-      cpus: 0.5
+      cpus: 1
 
 volumes:
   - /data/todox:/data/todox
