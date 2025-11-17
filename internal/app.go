@@ -12,10 +12,10 @@ import (
 	"go.leapkit.dev/core/server"
 )
 
-// DB is the database connection builder function
+// DBFn is the database connection builder function
 // that will be used by the application based on the driver and
 // connection string.
-var DB = db.ConnectionFn(
+var DBFn = db.ConnectionFn(
 	cmp.Or(os.Getenv("DATABASE_URL"), "database.db"),
 	db.WithDriver("sqlite3"),
 
@@ -47,7 +47,7 @@ func New() (string, http.Handler) {
 	)
 
 	// Inject the todoService into the context
-	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DB)))
+	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DBFn)))
 
 	r.HandleFunc("GET /{$}", todos.Index)
 	r.HandleFunc("GET /health", health)

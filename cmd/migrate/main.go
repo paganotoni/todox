@@ -14,7 +14,7 @@ import (
 // with the latest database schema migrator. which can be invoked
 // by running `migrate`.
 func main() {
-	conn, err := internal.DB()
+	conn, err := internal.DBFn()
 	if err != nil {
 		fmt.Println("Error connecting to the database: ", err)
 	}

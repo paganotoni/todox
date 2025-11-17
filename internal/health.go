@@ -7,7 +7,7 @@ import (
 )
 
 func health(w http.ResponseWriter, r *http.Request) {
-	db, err := DB()
+	db, err := DBFn()
 	if err != nil {
 		server.Error(w, err, http.StatusInternalServerError)
 		return
