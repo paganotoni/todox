@@ -6,7 +6,7 @@ import (
 	"go.leapkit.dev/core/server"
 )
 
-func Search(w http.ResponseWriter, r *http.Request) {
+func SearchItem(w http.ResponseWriter, r *http.Request) {
 	todos := r.Context().Value("todoService").(*service)
 
 	list, err := todos.Search(r.FormValue("keyword"))

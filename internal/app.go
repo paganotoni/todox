@@ -53,7 +53,7 @@ func New() (string, http.Handler) {
 	r.HandleFunc("GET /health", health)
 
 	r.Group("/todos", func(r server.Router) {
-		r.HandleFunc("GET /search", todos.Search)
+		r.HandleFunc("GET /search", todos.SearchItem)
 		r.HandleFunc("POST /{$}", todos.Create)
 		r.HandleFunc("GET /{id}/edit", todos.Edit)
 		r.HandleFunc("GET /{id}/show", todos.Show)
