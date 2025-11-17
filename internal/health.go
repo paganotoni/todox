@@ -3,7 +3,7 @@ package internal
 import (
 	"net/http"
 
-	"github.com/leapkit/leapkit/core/server"
+	"go.leapkit.dev/core/server"
 )
 
 func health(w http.ResponseWriter, r *http.Request) {

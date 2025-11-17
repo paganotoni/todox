@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gofrs/uuid/v5"
-	"github.com/leapkit/leapkit/core/server"
+	"go.leapkit.dev/core/server"
 	. "maragu.dev/gomponents"
 	. "maragu.dev/gomponents/html"
 

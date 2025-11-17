@@ -4,36 +4,41 @@ import (
 	"cmp"
 	"net/http"
 	"os"
+
 	"todox/internal/todos"
 	"todox/public"
 
-	"github.com/leapkit/leapkit/core/db"
-	"github.com/leapkit/leapkit/core/server"
+	"go.leapkit.dev/core/db"
+	"go.leapkit.dev/core/server"
 )
 
-var (
-	// DB is the database connection builder function
-	// that will be used by the application based on the driver and
-	// connection string.
-	DB = db.ConnectionFn(
-		cmp.Or(os.Getenv("DATABASE_URL"), "./todox.db"),
-		db.WithDriver("sqlite3"),
-	)
+// DB is the database connection builder function
+// that will be used by the application based on the driver and
+// connection string.
+var DB = db.ConnectionFn(
+	cmp.Or(os.Getenv("DATABASE_URL"), "database.db"),
+	db.WithDriver("sqlite3"),
+
+	db.Params(
+		"_busy_timeout", "5000",
+		"_journal_mode", "WAL",
+		"_sync", "1",
+		"_cache_size", "8192",
+		"_txlock", "deferred",
+
+		// journal_size_limit
+		// mmap_size
+	),
 )
 
-type Server interface {
-	Addr() string
-	Handler() http.Handler
-}
-
-// AddRoutes mounts the routes for the application,
+// New mounts the routes for the application,
 // it assumes that the base services have been injected
 // in the creation of the server instance.
-func New() Server {
+func New() (string, http.Handler) {
 	r := server.New(
 		server.WithHost(cmp.Or(os.Getenv("HOST"), "0.0.0.0")),
 		server.WithPort(cmp.Or(os.Getenv("PORT"), "3000")),
-		server.WithAssets(public.Files),
+		server.WithAssets(public.Files, "/public/"),
 
 		server.WithSession(
 			cmp.Or(os.Getenv("SESSION_SECRET"), "secret_key"),
@@ -57,5 +62,5 @@ func New() Server {
 		r.HandleFunc("PUT /{id}/complete", todos.Complete)
 	})
 
-	return r
+	return r.Addr(), r.Handler()
 }

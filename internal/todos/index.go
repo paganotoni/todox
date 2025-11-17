@@ -3,7 +3,7 @@ package todos
 import (
 	"net/http"
 
-	"github.com/leapkit/leapkit/core/server"
+	"go.leapkit.dev/core/server"
 	. "maragu.dev/gomponents"
 	. "maragu.dev/gomponents/html"
 
@@ -50,5 +50,4 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	)
 
 	p.Render(w)
-
 }
