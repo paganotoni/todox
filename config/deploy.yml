@@ -17,6 +17,7 @@ env:
   clear:
     GO_ENV: production
     DATABASE_URL: /data/todox/database.db
+    PORT: 80
   secret:
     - SESSION_SECRET
 
