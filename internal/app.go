@@ -25,7 +25,6 @@ var DBFn = db.ConnectionFn(
 		"_sync", "1",
 		"_cache_size", "8192",
 		"_txlock", "deferred",
-
 		// journal_size_limit
 		// mmap_size
 	),
