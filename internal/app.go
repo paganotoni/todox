@@ -49,7 +49,7 @@ func New() (string, http.Handler) {
 	r.Use(server.InCtxMiddleware("todoService", todos.NewService(DBFn)))
 
 	r.HandleFunc("GET /{$}", todos.Index)
-	r.HandleFunc("GET /health", health)
+	r.HandleFunc("GET /up", health)
 
 	r.Group("/todos", func(r server.Router) {
 		r.HandleFunc("GET /search", todos.SearchItem)

@@ -21,14 +21,8 @@ env:
     - SESSION_SECRET
 
 proxy:
-  host: todox.antoniopagano.com
-  forward_headers: true
   ssl: true
-  app_port: 3000
-  healthcheck:
-    interval: 2
-    timeout: 2
-    path: /health
+  host: todox.antoniopagano.com
 
 builder:
   arch: amd64
